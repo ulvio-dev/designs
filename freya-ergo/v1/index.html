@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freya Products - Uw digitale ergotherapeut</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Iconify -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iconify/2.0.0/iconify.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- React & ReactDOM from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel Standalone for JSX transformation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="h-full">
+  <div id="root" class="h-full"></div>
+
+  <!-- Load React Components -->
+  <script type="text/babel" src="Patient.js"></script>
+  <script type="text/babel" src="PatientChatStart.js"></script>
+  <script type="text/babel" src="PatientChat.js"></script>
+
+  <!-- Main App with Router -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const App = () => {
+      const [currentRoute, setCurrentRoute] = useState('patient');
+
+      // Simple hash-based routing
+      useEffect(() => {
+        const handleHashChange = () => {
+          const hash = window.location.hash.slice(1) || 'patient';
+          setCurrentRoute(hash);
+        };
+
+        // Set initial route
+        handleHashChange();
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+
+        return () => window.removeEventListener('hashchange', handleHashChange);
+      }, []);
+
+      // Global navigation function
+      window.navigateTo = (route) => {
+        window.location.hash = route;
+      };
+
+      // Render the appropriate component based on route
+      const renderComponent = () => {
+        switch (currentRoute) {
+          case 'patient':
+            return <Patient />;
+          case 'patient-chat-start':
+            return <PatientChatStart />;
+          case 'patient-chat':
+            return <PatientChat />;
+          default:
+            return <Patient />;
+        }
+      };
+
+      return renderComponent();
+    };
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
