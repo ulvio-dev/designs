@@ -41,8 +41,11 @@
   <!-- Load Pages -->
   <script type="text/babel" src="pages/PatientLanding.js"></script>
   <script type="text/babel" src="pages/ProLanding.js"></script>
+  <script type="text/babel" src="pages/ProChatStart.js"></script>
+  <script type="text/babel" src="pages/ProChat.js"></script>
+  <script type="text/babel" src="pages/ProReport.js"></script>
 
-  <!-- Existing Chat Components (will be reused for all flows) -->
+  <!-- Existing Chat Components (reused for patient flow) -->
   <script type="text/babel" src="PatientChatStart.js"></script>
   <script type="text/babel" src="PatientChat.js"></script>
 
@@ -66,13 +69,18 @@
     const App = () => {
       const [currentRoute, setCurrentRoute] = useState('patient');
       const [language, setLanguage] = useState('nl');
+      const [isLoggedIn, setIsLoggedIn] = useState(true);
       const [settingsOpen, setSettingsOpen] = useState(false);
 
-      // Load saved language from localStorage
+      // Load saved language and logged in state from localStorage
       useEffect(() => {
         const savedLanguage = localStorage.getItem('freya_language');
         if (savedLanguage && (savedLanguage === 'nl' || savedLanguage === 'en')) {
           setLanguage(savedLanguage);
+        }
+        const savedLoggedIn = localStorage.getItem('freya_logged_in');
+        if (savedLoggedIn !== null) {
+          setIsLoggedIn(savedLoggedIn === 'true');
         }
       }, []);
 
@@ -99,6 +107,11 @@
         localStorage.setItem('freya_language', newLanguage);
       };
 
+      const handleLoggedInChange = (newLoggedIn) => {
+        setIsLoggedIn(newLoggedIn);
+        localStorage.setItem('freya_logged_in', newLoggedIn);
+      };
+
       const t = (key) => {
         return translations[language]?.[key] || key;
       };
@@ -107,28 +120,21 @@
       const renderComponent = () => {
         // Patient Flow
         if (currentRoute === 'patient') return <PatientLanding t={t} />;
-        if (currentRoute === 'patient-chat-start') return <PatientChatStart />;
-        if (currentRoute === 'patient-chat') return <PatientChat />;
+        if (currentRoute === 'patient-chat-start') return <PatientChatStart t={t} />;
+        if (currentRoute === 'patient-chat') return <PatientChat t={t} />;
 
-        // Professional Demo Flow
+        // Professional Flow (with logged in context)
         if (currentRoute === 'pro') return <ProLanding t={t} />;
         if (currentRoute === 'pro-login') return <ProLogin t={t} />;
-        if (currentRoute === 'pro-chat-start') return <ProChatStart t={t} />;
-        if (currentRoute === 'pro-chat') return <ProChat t={t} />;
-        if (currentRoute === 'pro-report') return <ProReport t={t} />;
-
-        // Professional Logged In Flow (same components, different context)
-        if (currentRoute === 'pro-logged-in') return <ProLanding t={t} />;
-        if (currentRoute === 'pro-logged-in-login') return <ProLogin t={t} />;
-        if (currentRoute === 'pro-logged-in-chat-start') return <ProChatStart t={t} />;
-        if (currentRoute === 'pro-logged-in-chat') return <ProChat t={t} />;
-        if (currentRoute === 'pro-logged-in-report') return <ProReport t={t} />;
+        if (currentRoute === 'pro-chat-start') return <ProChatStart t={t} isLoggedIn={isLoggedIn} />;
+        if (currentRoute === 'pro-chat') return <ProChat t={t} isLoggedIn={isLoggedIn} />;
+        if (currentRoute === 'pro-report') return <ProReport t={t} isLoggedIn={isLoggedIn} />;
 
         // Default
         return <PatientLanding t={t} />;
       };
 
-      // Placeholder components for professional pages (simplified versions)
+      // Placeholder login component (simplified)
       const ProLogin = ({ t }) => (
         <div className="h-full flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white rounded-xl shadow-lg max-w-md">
@@ -144,56 +150,6 @@
         </div>
       );
 
-      const ProChatStart = ({ t }) => (
-        <div className="h-full flex items-center justify-center bg-gray-50">
-          <div className="text-center p-8 bg-white rounded-xl shadow-lg max-w-md">
-            <h2 className="text-2xl font-bold mb-4">{t('pro_chat_start_title')}</h2>
-            <p className="text-gray-600 mb-6">{t('pro_chat_start_description')}</p>
-            <button
-              onClick={() => window.navigateTo('pro-chat')}
-              className="px-6 py-3 bg-[#90A40A] text-white rounded-lg hover:bg-[#7a8d08] transition-all"
-            >
-              {t('pro_chat_start_button')}
-            </button>
-          </div>
-        </div>
-      );
-
-      const ProChat = ({ t }) => (
-        <div className="h-full flex items-center justify-center bg-gray-50">
-          <div className="text-center p-8 bg-white rounded-xl shadow-lg max-w-md">
-            <h2 className="text-2xl font-bold mb-4">{t('pro_chat_title')}</h2>
-            <p className="text-gray-600 mb-6">Professional chat interface (simplified for demo)</p>
-            <button
-              onClick={() => window.navigateTo('pro-report')}
-              className="px-6 py-3 bg-[#90A40A] text-white rounded-lg hover:bg-[#7a8d08] transition-all"
-            >
-              {t('pro_report_title')}
-            </button>
-          </div>
-        </div>
-      );
-
-      const ProReport = ({ t }) => (
-        <div className="h-full flex items-center justify-center bg-gray-50">
-          <div className="text-center p-8 bg-white rounded-xl shadow-lg max-w-md">
-            <h2 className="text-2xl font-bold mb-4">{t('pro_report_title')}</h2>
-            <p className="text-gray-600 mb-6">Professional report page (simplified for demo)</p>
-            <div className="flex gap-3 justify-center">
-              <button
-                onClick={() => window.navigateTo('pro')}
-                className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-all"
-              >
-                {t('pro_report_new')}
-              </button>
-              <button className="px-6 py-3 bg-[#90A40A] text-white rounded-lg hover:bg-[#7a8d08] transition-all">
-                {t('pro_report_download')}
-              </button>
-            </div>
-          </div>
-        </div>
-      );
-
       return (
         <LanguageContext.Provider value={{ language, setLanguage: handleLanguageChange }}>
           <div className="h-full relative">
@@ -204,6 +160,8 @@
               onClose={() => setSettingsOpen(false)}
               currentLanguage={language}
               onLanguageChange={handleLanguageChange}
+              isLoggedIn={isLoggedIn}
+              onLoggedInChange={handleLoggedInChange}
               t={t}
             />
           </div>

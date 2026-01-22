@@ -1,4 +1,4 @@
-const PatientChat = () => {
+const PatientChat = ({ t }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [email, setEmail] = React.useState('');
 
@@ -29,7 +29,7 @@ const PatientChat = () => {
       // Here you could redirect to a report page or show success message
       console.log('Email submitted:', email);
       closeModal();
-      alert('Uw rapport wordt verzonden naar ' + email);
+      alert(t('patient_alert_sent') + ' ' + email);
     }
   };
 
@@ -59,7 +59,7 @@ const PatientChat = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#90A40A] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#90A40A]"></span>
           </span>
-          <span className="text-xs md:text-sm text-[#7F601B] font-medium">Freya is online</span>
+          <span className="text-xs md:text-sm text-[#7F601B] font-medium">{t('freya_online')}</span>
         </div>
       </header>
 
@@ -79,7 +79,7 @@ const PatientChat = () => {
               <div className="text-sm md:text-base font-medium text-[#7F601B]">Freya</div>
               <div className="bg-white rounded-3xl rounded-tl-sm px-5 md:px-6 py-4 md:py-5 shadow-sm border border-neutral-100">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  Welkom! Waar kan ik u vandaag mee helpen?
+                  {t('patient_chat_welcome')}
                 </p>
               </div>
             </div>
@@ -93,7 +93,7 @@ const PatientChat = () => {
             <div className="flex-1 space-y-2">
               <div className="bg-[#F3F4F6] rounded-3xl rounded-tr-sm px-5 md:px-6 py-4 md:py-5 shadow-sm">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  Mijn moeder is vorige week gevallen in de badkamer. We willen de badkamer veiliger maken, maar we weten niet goed waar te beginnen.
+                  {t('patient_chat_user_1')}
                 </p>
               </div>
             </div>
@@ -112,15 +112,15 @@ const PatientChat = () => {
               <div className="text-sm md:text-base font-medium text-[#7F601B]">Freya</div>
               <div className="bg-white rounded-3xl rounded-tl-sm px-5 md:px-6 py-4 md:py-5 shadow-sm border border-neutral-100">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  Dat begrijp ik heel goed. Een val kan angst veroorzaken. Laten we samen kijken hoe we de badkamer veiliger kunnen maken.
+                  {t('patient_chat_bot_1')}
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-[#262626] mt-3">
-                  Mag ik u een paar vragen stellen over de badkamer?
+                  {t('patient_chat_bot_1_question')}
                 </p>
                 <ul className="list-disc list-inside mt-3 space-y-2 text-[#525252]">
-                  <li className="text-base md:text-lg">Wat voor vloer heeft de badkamer?</li>
-                  <li className="text-base md:text-lg">Zijn er al steungrepen of handvaten?</li>
-                  <li className="text-base md:text-lg">Heeft uw moeder moeite met opstaan of blijven staan?</li>
+                  <li className="text-base md:text-lg">{t('patient_chat_question_1')}</li>
+                  <li className="text-base md:text-lg">{t('patient_chat_question_2')}</li>
+                  <li className="text-base md:text-lg">{t('patient_chat_question_3')}</li>
                 </ul>
               </div>
             </div>
@@ -134,7 +134,7 @@ const PatientChat = () => {
             <div className="flex-1 space-y-2">
               <div className="bg-[#F3F4F6] rounded-3xl rounded-tr-sm px-5 md:px-6 py-4 md:py-5 shadow-sm">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  De vloer is betegeld en kan glad zijn als het nat is. Er zijn geen steungrepen. Mijn moeder is 72 jaar en heeft soms moeite met haar evenwicht, vooral als ze moe is.
+                  {t('patient_chat_user_2')}
                 </p>
               </div>
             </div>
@@ -153,30 +153,30 @@ const PatientChat = () => {
               <div className="text-sm md:text-base font-medium text-[#7F601B]">Freya</div>
               <div className="bg-white rounded-3xl rounded-tl-sm px-5 md:px-6 py-4 md:py-5 shadow-sm border border-neutral-100">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  Dank u wel voor deze informatie. Ik begrijp de situatie goed.
+                  {t('patient_chat_bot_2_thanks')}
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-[#262626] mt-4 font-semibold">
-                  Dit zijn mijn belangrijkste aanbevelingen:
+                  {t('patient_chat_bot_2_recommendations')}
                 </p>
 
                 <div className="mt-4 space-y-4">
                   {/* Belangrijkste aanpassingen */}
                   <div className="bg-red-50 border-red-400 rounded-lg p-4">
-                    <p className="text-base md:text-lg font-semibold text-red-900 mb-2">Heel belangrijk:</p>
+                    <p className="text-base md:text-lg font-semibold text-red-900 mb-2">{t('patient_chat_critical_title')}</p>
                     <ul className="list-disc list-inside space-y-2 text-[#525252]">
-                      <li className="text-base md:text-lg">Antislipmat in de douche en voor de wastafel</li>
-                      <li className="text-base md:text-lg">Steungrepen naast de douche en toilet</li>
-                      <li className="text-base md:text-lg">Betere verlichting (eventueel met bewegingssensor)</li>
+                      <li className="text-base md:text-lg">{t('patient_chat_critical_1')}</li>
+                      <li className="text-base md:text-lg">{t('patient_chat_critical_2')}</li>
+                      <li className="text-base md:text-lg">{t('patient_chat_critical_3')}</li>
                     </ul>
                   </div>
 
                   {/* Extra aanbevelingen */}
                   <div className="bg-[#F9FAF4] border-[#90A40A] rounded-lg p-4">
-                    <p className="text-base md:text-lg font-semibold text-green-900 mb-2">Ook handig:</p>
+                    <p className="text-base md:text-lg font-semibold text-green-900 mb-2">{t('patient_chat_recommended_title')}</p>
                     <ul className="list-disc list-inside space-y-2 text-[#525252]">
-                      <li className="text-base md:text-lg">Douchestoel om op te zitten tijdens het douchen</li>
-                      <li className="text-base md:text-lg">Verhoogde toiletbril voor gemakkelijker opstaan</li>
-                      <li className="text-base md:text-lg">Handdouche met lange slang</li>
+                      <li className="text-base md:text-lg">{t('patient_chat_recommended_1')}</li>
+                      <li className="text-base md:text-lg">{t('patient_chat_recommended_2')}</li>
+                      <li className="text-base md:text-lg">{t('patient_chat_recommended_3')}</li>
                     </ul>
                   </div>
                 </div>
@@ -197,21 +197,21 @@ const PatientChat = () => {
               <div className="text-sm md:text-base font-medium text-[#7F601B]">Freya</div>
               <div className="bg-white rounded-3xl rounded-tl-sm px-5 md:px-6 py-4 md:py-5 shadow-sm border border-neutral-100">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  Wilt u nog iets toevoegen of aanpassen? Of kan ik uw persoonlijk adviesrapport klaarmaken?
+                  {t('patient_chat_bot_3_final')}
                 </p>
               </div>
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button className="inline-flex items-center justify-center px-6 py-3.5 rounded-full border-2 border-neutral-300 bg-white text-base md:text-lg font-medium text-[#262626] hover:border-[#90A40A] hover:text-[#90A40A] transition-all shadow-sm hover:shadow-md">
-                  Ik wil iets toevoegen
+                  {t('patient_chat_add_something')}
                 </button>
                 <button
                   onClick={handleReportClick}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#90A40A] hover:bg-[#7a8d08] text-white text-base md:text-lg font-semibold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
                 >
                   <span className="iconify" data-icon="lucide:file-text" data-width="20"></span>
-                  Rapport klaarmaken
+                  {t('patient_chat_prepare_report')}
                 </button>
               </div>
             </div>
@@ -226,13 +226,13 @@ const PatientChat = () => {
           <form onSubmit={handleSendMessage} className="relative flex items-center mb-3">
             <input
               type="text"
-              placeholder="Typ uw bericht hier..."
+              placeholder={t('patient_input_placeholder')}
               className="w-full bg-[#FAF9F6] border border-neutral-200 text-[#262626] text-base rounded-full focus:ring-2 focus:ring-[#90A40A] focus:border-[#90A40A] block pl-5 pr-14 py-4 transition-all outline-none"
             />
             <button
               type="submit"
               className="absolute right-2 bg-[#90A40A] hover:bg-[#7a8d08] text-white rounded-full p-2.5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-              aria-label="Bericht versturen"
+              aria-label={t('patient_send_button_aria')}
             >
               <span className="iconify w-5 h-5" data-icon="lucide:send" data-stroke-width="2"></span>
             </button>
@@ -241,12 +241,11 @@ const PatientChat = () => {
           {/* Legal Notice */}
           <div className="text-center px-2">
             <p className="text-[10px] md:text-xs text-[#7F601B]/60 leading-relaxed">
-              Door een bericht naar Freya, een AI-chatbot, te sturen, gaat u akkoord met onze{' '}
-              <a href="#" className="underline hover:text-[#90A40A]">Voorwaarden</a>
-              {' '}en bevestigt u dat u ons{' '}
-              <a href="#" className="underline hover:text-[#90A40A]">Privacybeleid</a> hebt gelezen.
-              Bekijk de{' '}
-              <a href="#" className="underline hover:text-[#90A40A]">cookievoorkeuren</a>.
+              {t('patient_legal_notice')}{' '}
+              <a href="#" className="underline hover:text-[#90A40A]">{t('patient_terms')}</a>
+              {' '}{t('patient_and')}{' '}
+              <a href="#" className="underline hover:text-[#90A40A]">{t('patient_privacy_policy')}</a> {t('patient_privacy_read')}{' '}
+              <a href="#" className="underline hover:text-[#90A40A]">{t('patient_cookie_preferences')}</a>.
             </p>
           </div>
         </div>
@@ -270,8 +269,8 @@ const PatientChat = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900">Uw persoonlijk adviesrapport</h3>
-                  <p className="text-sm md:text-base text-[#7F601B]/70 mt-1">Ontvang uw advies via e-mail</p>
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900">{t('patient_modal_title')}</h3>
+                  <p className="text-sm md:text-base text-[#7F601B]/70 mt-1">{t('patient_modal_subtitle')}</p>
                 </div>
                 <button
                   onClick={closeModal}
@@ -287,7 +286,7 @@ const PatientChat = () => {
               {/* Email Input */}
               <div>
                 <label htmlFor="emailInput" className="block text-base md:text-lg font-medium text-gray-900 mb-3">
-                  E-mailadres <span className="text-red-500">*</span>
+                  {t('patient_modal_email_label')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -300,12 +299,12 @@ const PatientChat = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="uw.email@voorbeeld.be"
+                    placeholder={t('patient_modal_email_placeholder')}
                     className="w-full bg-[#FAF9F6] border-2 border-neutral-200 text-[#262626] text-base md:text-lg rounded-xl focus:ring-2 focus:ring-[#90A40A] focus:border-[#90A40A] block pl-12 pr-4 py-4 transition-all outline-none"
                   />
                 </div>
                 <p className="text-sm text-[#7F601B]/60 mt-2 ml-1">
-                  U zal het rapport binnen enkele minuten ontvangen.
+                  {t('patient_modal_email_info')}
                 </p>
               </div>
 
@@ -313,9 +312,9 @@ const PatientChat = () => {
               <div className="bg-slate-100 rounded-xl p-4 md:p-5 flex gap-3 md:gap-4">
                 <span className="iconify text-slate-500 w-6 h-6 shrink-0 mt-0.5" data-icon="lucide:shield-check"></span>
                 <div className="text-xs text-slate-900 leading-relaxed">
-                  <strong className="font-semibold block mb-1">Uw privacy is belangrijk</strong>
-                  Uw e-mailadres wordt veilig bewaard en alleen gebruikt om het rapport te versturen. We houden ons aan het{' '}
-                  <a href="#" className="underline hover:text-blue-700">privacybeleid</a>.
+                  <strong className="font-semibold block mb-1">{t('patient_modal_privacy_title')}</strong>
+                  {t('patient_modal_privacy_text')}{' '}
+                  <a href="#" className="underline hover:text-blue-700">{t('patient_modal_privacy_link')}</a>.
                 </div>
               </div>
 
@@ -326,14 +325,14 @@ const PatientChat = () => {
                   onClick={closeModal}
                   className="w-full sm:w-auto px-6 py-3.5 text-base md:text-lg font-medium text-gray-700 bg-white border-2 border-neutral-200 rounded-xl hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm order-2 sm:order-1"
                 >
-                  Annuleren
+                  {t('patient_modal_cancel')}
                 </button>
                 <button
                   type="submit"
                   className="w-full sm:w-auto px-6 py-3.5 text-base md:text-lg font-semibold text-white bg-[#90A40A] hover:bg-[#7a8d08] rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 order-1 sm:order-2"
                 >
                   <span className="iconify w-5 h-5" data-icon="lucide:arrow-right" data-stroke-width="2"></span>
-                  Verstuur rapport
+                  {t('patient_modal_send')}
                 </button>
               </div>
             </form>

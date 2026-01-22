@@ -1,4 +1,4 @@
-const PatientChatStart = () => {
+const PatientChatStart = ({ t }) => {
   const handleSuggestionClick = (suggestion) => {
     console.log('Suggestion clicked:', suggestion);
     // Here you could handle the suggestion click
@@ -31,7 +31,7 @@ const PatientChatStart = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#90A40A] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#90A40A]"></span>
           </span>
-          <span className="text-xs md:text-sm text-[#7F601B] font-medium">Freya is online</span>
+          <span className="text-xs md:text-sm text-[#7F601B] font-medium">{t('freya_online')}</span>
         </div>
       </header>
 
@@ -53,10 +53,10 @@ const PatientChatStart = () => {
               <div className="text-sm md:text-base font-medium text-[#7F601B]">Freya</div>
               <div className="bg-white rounded-3xl rounded-tl-sm px-5 md:px-6 py-4 md:py-5 shadow-sm border border-neutral-100">
                 <p className="text-base md:text-lg leading-relaxed text-[#262626]">
-                  Welkom! Ik ben Freya, uw digitale ergotherapeut. Ik begrijp dat sommige dingen thuis moeilijker worden. Dat is helemaal normaal.
+                  {t('patient_chat_start_welcome')}
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-[#262626] mt-3">
-                  Neem gerust de tijd en vertel waar u mee worstelt - ik ben er om te helpen.
+                  {t('patient_chat_start_welcome_2')}
                 </p>
               </div>
             </div>
@@ -64,75 +64,75 @@ const PatientChatStart = () => {
 
           {/* Suggestion Chips */}
           <div className="fade-in-up delay-300 pl-14 md:pl-16 space-y-3">
-            <p className="text-xs md:text-sm text-[#7F601B]/70 font-medium mb-3">U kunt kiezen uit:</p>
+            <p className="text-xs md:text-sm text-[#7F601B]/70 font-medium mb-3">{t('patient_choose_from')}</p>
 
             <div className="flex flex-wrap gap-2">
               {/* Veiligheid thuis */}
               <button
-                onClick={() => handleSuggestionClick('Ik ben bang om te vallen')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_1'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:shield-check" data-stroke-width="1.5"></span>
-                Ik ben bang om te vallen
+                {t('patient_suggestion_1')}
               </button>
 
               <button
-                onClick={() => handleSuggestionClick('Hoe maak ik de badkamer veiliger?')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_2'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:droplets" data-stroke-width="1.5"></span>
-                Hoe maak ik de badkamer veiliger?
+                {t('patient_suggestion_2')}
               </button>
 
               {/* Dagelijkse activiteiten */}
               <button
-                onClick={() => handleSuggestionClick('Ik heb moeite met aankleden')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_3'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:shirt" data-stroke-width="1.5"></span>
-                Ik heb moeite met aankleden
+                {t('patient_suggestion_3')}
               </button>
 
               <button
-                onClick={() => handleSuggestionClick('Hoe kan ik makkelijker koken?')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_4'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:chef-hat" data-stroke-width="1.5"></span>
-                Hoe kan ik makkelijker koken?
+                {t('patient_suggestion_4')}
               </button>
 
               {/* Hulpmiddelen */}
               <button
-                onClick={() => handleSuggestionClick('Welke hulpmiddelen zijn er?')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_5'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:package" data-stroke-width="1.5"></span>
-                Welke hulpmiddelen zijn er?
+                {t('patient_suggestion_5')}
               </button>
 
               <button
-                onClick={() => handleSuggestionClick('Advies over een rollator')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_6'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:accessibility" data-stroke-width="1.5"></span>
-                Advies over een rollator
+                {t('patient_suggestion_6')}
               </button>
 
               {/* Voor mantelzorger */}
               <button
-                onClick={() => handleSuggestionClick('Ik zorg thuis voor iemand')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_7'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:heart-handshake" data-stroke-width="1.5"></span>
-                Ik zorg thuis voor iemand
+                {t('patient_suggestion_7')}
               </button>
 
               <button
-                onClick={() => handleSuggestionClick('Hoe kan ik mijn ouder helpen?')}
+                onClick={() => handleSuggestionClick(t('patient_suggestion_8'))}
                 className="group px-4 py-2.5 bg-white hover:bg-[#F9FAF4] border border-neutral-200 hover:border-[#90A40A] rounded-full text-sm md:text-base text-[#262626] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 <span className="iconify text-[#90A40A] w-4 h-4" data-icon="lucide:users" data-stroke-width="1.5"></span>
-                Hoe kan ik mijn ouder helpen?
+                {t('patient_suggestion_8')}
               </button>
             </div>
           </div>
@@ -146,13 +146,13 @@ const PatientChatStart = () => {
           <form onSubmit={handleSendMessage} className="relative flex items-center mb-3">
             <input
               type="text"
-              placeholder="Typ uw bericht hier..."
+              placeholder={t('patient_input_placeholder')}
               className="w-full bg-[#FAF9F6] border border-neutral-200 text-[#262626] text-base rounded-full focus:ring-2 focus:ring-[#90A40A] focus:border-[#90A40A] block pl-5 pr-14 py-4 transition-all outline-none"
             />
             <button
               type="submit"
               className="absolute right-2 bg-[#90A40A] hover:bg-[#7a8d08] text-white rounded-full p-2.5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
-              aria-label="Bericht versturen"
+              aria-label={t('patient_send_button_aria')}
             >
               <span className="iconify w-5 h-5" data-icon="lucide:send" data-stroke-width="2"></span>
             </button>
@@ -161,12 +161,11 @@ const PatientChatStart = () => {
           {/* Legal Notice */}
           <div className="text-center px-2">
             <p className="text-[10px] md:text-xs text-[#7F601B]/60 leading-relaxed">
-              Door een bericht naar Freya, een AI-chatbot, te sturen, gaat u akkoord met onze{' '}
-              <a href="#" className="underline hover:text-[#90A40A]">Voorwaarden</a>
-              {' '}en bevestigt u dat u ons{' '}
-              <a href="#" className="underline hover:text-[#90A40A]">Privacybeleid</a> hebt gelezen.
-              Bekijk de{' '}
-              <a href="#" className="underline hover:text-[#90A40A]">cookievoorkeuren</a>.
+              {t('patient_legal_notice')}{' '}
+              <a href="#" className="underline hover:text-[#90A40A]">{t('patient_terms')}</a>
+              {' '}{t('patient_and')}{' '}
+              <a href="#" className="underline hover:text-[#90A40A]">{t('patient_privacy_policy')}</a> {t('patient_privacy_read')}{' '}
+              <a href="#" className="underline hover:text-[#90A40A]">{t('patient_cookie_preferences')}</a>.
             </p>
           </div>
         </div>

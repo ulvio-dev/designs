@@ -1,4 +1,4 @@
-const SettingsModal = ({ isOpen, onClose, currentLanguage, onLanguageChange, t }) => {
+const SettingsModal = ({ isOpen, onClose, currentLanguage, onLanguageChange, isLoggedIn, onLoggedInChange, t }) => {
   const { useState } = React;
 
   if (!isOpen) return null;
@@ -7,16 +7,11 @@ const SettingsModal = ({ isOpen, onClose, currentLanguage, onLanguageChange, t }
     { name: 'Patient Landing', path: 'patient', flow: 'Patient Flow' },
     { name: 'Patient Chat Start', path: 'patient-chat-start', flow: 'Patient Flow' },
     { name: 'Patient Chat', path: 'patient-chat', flow: 'Patient Flow' },
-    { name: 'Professional Landing (Demo)', path: 'pro', flow: 'Pro Demo Flow' },
-    { name: 'Professional Login (Demo)', path: 'pro-login', flow: 'Pro Demo Flow' },
-    { name: 'Professional Chat Start (Demo)', path: 'pro-chat-start', flow: 'Pro Demo Flow' },
-    { name: 'Professional Chat (Demo)', path: 'pro-chat', flow: 'Pro Demo Flow' },
-    { name: 'Professional Report (Demo)', path: 'pro-report', flow: 'Pro Demo Flow' },
-    { name: 'Professional Landing (Logged In)', path: 'pro-logged-in', flow: 'Pro Logged In Flow' },
-    { name: 'Professional Login', path: 'pro-logged-in-login', flow: 'Pro Logged In Flow' },
-    { name: 'Professional Chat Start (Logged In)', path: 'pro-logged-in-chat-start', flow: 'Pro Logged In Flow' },
-    { name: 'Professional Chat (Logged In)', path: 'pro-logged-in-chat', flow: 'Pro Logged In Flow' },
-    { name: 'Professional Report (Logged In)', path: 'pro-logged-in-report', flow: 'Pro Logged In Flow' },
+    { name: 'Professional Landing', path: 'pro', flow: 'Professional Flow' },
+    { name: 'Professional Login', path: 'pro-login', flow: 'Professional Flow' },
+    { name: 'Professional Chat Start', path: 'pro-chat-start', flow: 'Professional Flow' },
+    { name: 'Professional Chat', path: 'pro-chat', flow: 'Professional Flow' },
+    { name: 'Professional Report', path: 'pro-report', flow: 'Professional Flow' },
   ];
 
   const groupedRoutes = routes.reduce((acc, route) => {
@@ -72,6 +67,35 @@ const SettingsModal = ({ isOpen, onClose, currentLanguage, onLanguageChange, t }
                 }`}
               >
                 English
+              </button>
+            </div>
+          </div>
+
+          {/* Logged In Toggle */}
+          <div className="mb-8">
+            <h3 className="text-sm font-semibold text-[#111] uppercase tracking-wider mb-4">
+              {t('settings_logged_in')}
+            </h3>
+            <div className="flex gap-3">
+              <button
+                onClick={() => onLoggedInChange(true)}
+                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                  isLoggedIn
+                    ? 'bg-[#90A40A] text-white shadow-md'
+                    : 'bg-neutral-100 text-[#666] hover:bg-neutral-200'
+                }`}
+              >
+                {t('settings_logged_in_yes')}
+              </button>
+              <button
+                onClick={() => onLoggedInChange(false)}
+                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                  !isLoggedIn
+                    ? 'bg-[#90A40A] text-white shadow-md'
+                    : 'bg-neutral-100 text-[#666] hover:bg-neutral-200'
+                }`}
+              >
+                {t('settings_logged_in_no')}
               </button>
             </div>
           </div>
